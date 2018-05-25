@@ -21,7 +21,7 @@ L.tileLayer('https://geo.h2o.ucsd.edu/map_tiles_v2/{z}/{x}/{y}.png', {
   maxZoom: 8,
 }).addTo(mymap);
 
-fetch("http://0.0.0.0:8000/s4p_fixed_01.json").then((response) => {
+fetch("s4p_fixed_01.json").then((response) => {
   return response.json()
 }).then((geojson) =>{
   let ct = L.vectorGrid.slicer(geojson, {
