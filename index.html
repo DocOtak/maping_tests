@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+  <style type="text/css">
+    #mapid {
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mapid"></div>
+  <script>var mymap = L.map('mapid', {
+      maxZoom: 8
+    }
+
+    ).setView([0, -180], 2);
+
+    L.tileLayer('https://cchdo.github.io/hdo-assets/map_tiles_v2/{z}/{x}/{y}.png', {
+      attribution: '',
+      maxZoom: 8,
+    }
+
+    ).addTo(mymap);
+
+    const crusies = [
+    "2010-CCE2.geojson",
+    "2010-EXITS2.geojson",
+    "2013-P02-Leg1-dateline.geojson",
+    "2013-P02-Leg2.geojson",
+    "2014-P16S-dateline.geojson",
+    "s4p_fixed_01.geojson"
+    ]
+
+    crusies.forEach(file => {
+    fetch(file).then((response) => {
+      return response.json()
+    }
+
+    ).then((geojson) => {
+      let ct = L.vectorGrid.slicer(geojson, {
+        vectorTileLayerStyles: {
+          sliced: {
+            color: '#f00',
+            weight: 5
+          }
+        }
+      }
+
+      ).addTo(mymap)
+    }
+
+    );
+      
+    });
+
+
+  </script>
+</body>
+
+</html>
