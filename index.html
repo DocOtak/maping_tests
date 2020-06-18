@@ -37,10 +37,10 @@
     "2013-P02-Leg1-dateline.geojson",
     "2013-P02-Leg2.geojson",
     "2014-P16S-dateline.geojson",
-    "2015-arc01.geojson",
+    "2015-arc01-multi.geojson",
     "2016-i08s.geojson",
     "2016-i09n.geojson",
-    "2018-s4p.geojson",
+    "2018-s4p.topojson",
     ]
 
     crusies.forEach(file => {
@@ -50,15 +50,20 @@
 
     ).then((geojson) => {
       let ct = L.vectorGrid.slicer(geojson, {
+        interactive: true,
         vectorTileLayerStyles: {
           sliced: {
+            color: '#f00',
+            weight: 5
+          },
+          "2018-s4p": {
             color: '#f00',
             weight: 5
           }
         }
       }
 
-      ).addTo(mymap)
+      ).on("click", (e) => L.popup().setLatLng(e.latlng).setContent(`Cruise: ${e.layer.properties.name}<br />Year: ${e.layer.properties.year}`).openOn(mymap)).addTo(mymap)
     }
 
     );
