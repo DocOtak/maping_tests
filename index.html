@@ -10,6 +10,9 @@
     crossorigin=""></script>
   <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
   <style type="text/css">
+  body {
+    margin: 0;
+  }
     #mapid {
       height: 100vh;
     }
@@ -44,6 +47,8 @@
     "2018-s4p.topojson",
     "2018-gp19.topojson",
     "2019-i06.topojson",
+    "2021-a20.topojson",
+    "2021-a22.topojson",
     ]
 
     crusies.forEach(file => {
@@ -68,6 +73,14 @@
             weight: 5
           },
           "i06": {
+            color: '#f00',
+            weight: 5
+          },
+          "2021-a22": {
+            color: '#f00',
+            weight: 5
+          },
+          "2021-a20": {
             color: '#f00',
             weight: 5
           }
